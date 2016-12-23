@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>snow</title>
+    <style>
+        body {
+            background: #000;
+            background: url(./imgs/snow-bg.jpg) no-repeat center 0 #000;
+        }
+        .snowbg {
+            width: 1000px;
+            height: 600px;
+            clear: both;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .snow {
+            position: absolute;
+            top: 0;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="snowbg"></div>
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./lib/snabbt.min.js"></script>
+    <script>
+        $(function() {
+            var d = "<div class='snow'>❅<div>"
+            setInterval(function() {
+                var f = $(document).width();
+                var e = Math.random() * f - 100; //-100 - (doc-100)
+                var o = 0.3 + Math.random(); //0.3+
+                var fon = 10 + Math.random() * 30; //10-40
+                var l = - 100 + 200 * Math.random(); //[-100,100]
+                var k = 2000 + 5000 * Math.random(); //2000-7000
+                var $clone = $(d).clone();
+                $clone.appendTo(".snowbg").css({
+                    left: e + "px",
+                    opacity: o,
+                    "font-size": fon,
+                }).snabbt({                   
+                    position:[l,400,0],
+                    opacity: 0.1,
+                    easing: 'linear',
+                    duration: k,
+                    complete: function(index,total){
+                        //connot get correct this object
+                        //console.log(this)
+                        $clone.remove()
+                    }
+                });
+            }, 200)
+        })
+    </script>
+</body>
+
+</html>
